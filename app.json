@@ -3,6 +3,9 @@
     "name": "restaurant-menu-app",
     "slug": "restaurant-menu-app",
     "version": "1.0.0",
+    "experiments": {
+      "baseUrl": "/restaurant-menu-app"
+    },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
