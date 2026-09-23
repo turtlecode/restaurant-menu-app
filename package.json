@@ -14,14 +14,17 @@
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
+    "gh-pages": "^6.3.0",
     "typescript": "~6.0.3"
   },
+  "homepage": "https://turtlecode.github.io/restaurant-menu-app",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "build:web": "expo export --platform web",
+    "deploy": "npm run build:web && gh-pages -d dist -b gh-pages",
     "serve": "npx serve dist",
     "typecheck": "tsc --noEmit"
   },
