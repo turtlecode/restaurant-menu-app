@@ -24,7 +24,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "build:web": "expo export --platform web",
-    "deploy": "npm run build:web && gh-pages -d dist -b gh-pages",
+    "deploy": "npm run build:web && gh-pages -d dist -b gh-pages --dotfiles --nojekyll",
     "serve": "npx serve dist",
     "typecheck": "tsc --noEmit"
   },
