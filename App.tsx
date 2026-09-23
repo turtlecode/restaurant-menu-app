@@ -1,20 +1,51 @@
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, SafeAreaView, Platform, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { HomeScreen } from './src/screens/HomeScreen';
+import { MenuScreen } from './src/screens/MenuScreen';
+import { Restaurant } from './src/types';
+import { COLORS } from './src/theme/colors';
 
 export default function App() {
+  const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
+
+  useEffect(() => {
+    // Set web page title
+    if (Platform.OS === 'web' && typeof document !== 'undefined') {
+      if (selectedRestaurant) {
+        document.title = `${selectedRestaurant.name} - Menü | RestoranMenü`;
+      } else {
+        document.title = 'RestoranMenü - Şehrin En İyi Restoran ve Menü Rehberi';
+      }
+    }
+  }, [selectedRestaurant]);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.rootContainer}>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        {selectedRestaurant ? (
+          <MenuScreen
+            restaurant={selectedRestaurant}
+            onBack={() => setSelectedRestaurant(null)}
+          />
+        ) : (
+          <HomeScreen
+            onSelectRestaurant={(restaurant) => setSelectedRestaurant(restaurant)}
+          />
+        )}
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: COLORS.primaryDark,
+  },
+  appContainer: {
+    flex: 1,
+    backgroundColor: COLORS.background,
   },
 });
